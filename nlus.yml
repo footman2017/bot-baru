@@ -10,6 +10,13 @@ nlu_greeting:
         - selamat sore
       greeting_malam:
         - selamat malam
+      hi:
+        - hi
+        - hallo
+        - helo
+        - hei
+        - hey
+        - hai
 
 reservasiNLU:
   type: keyword

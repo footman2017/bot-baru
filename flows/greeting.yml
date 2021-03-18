@@ -27,6 +27,13 @@ intents:
       nlu: nlu_greeting
       match: greeting_malam
 
+  intent_sapa:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_greeting
+      match: hi
+
 states:
   state_initial:
     initial: true
@@ -39,6 +46,8 @@ states:
         condition: intent == 'intent_sore'
       state_malam:
         condition: intent == 'intent_malam'
+      state_sapa:
+        condition: intent == 'intent_sapa'
 
   state_pagi:
     action:
@@ -62,6 +71,11 @@ states:
   state_malam:
     action:
       - name: act_malam
+    end: true
+
+  state_sapa:
+    action:
+      - name: act_sapa
     end: true
 
 actions:
@@ -100,3 +114,10 @@ actions:
     options:
       text:
         - aksi kedua
+  
+  act_sapa:
+    type: text
+    options: 
+      text:
+        - hi juga
+        - hallo juga

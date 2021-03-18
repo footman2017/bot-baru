@@ -1,0 +1,8 @@
+schema: kata.ai/schema/kata-ml/1.0
+name: bot-baru
+desc: My First Bot
+flows:
+    greeting: $include(flows/greeting.yml)
+    default: $include(flows/default.yml)
+nlus: $include(nlus.yml)
+tag: null

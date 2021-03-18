@@ -1,0 +1,19 @@
+nlu_greeting:
+  type: keyword
+  options:
+    keywords :
+      greeting_pagi:
+        - selamat pagi
+      greeting_siang:
+        - selamat siang
+      greeting_sore:
+        - selamat sore
+      greeting_malam:
+        - selamat malam
+
+reservasiNLU:
+  type: keyword
+  options:
+    keywords :
+      menu:
+        - menu

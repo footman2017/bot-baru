@@ -1,0 +1,20 @@
+fallback: true
+intents:
+    fallback:
+        fallback: true
+states:
+    init:
+        initial: true
+        transitions:
+            other:
+                fallback: true
+    other:
+        end: true
+        action:
+            - name: act_text
+actions:
+    act_text:
+        type: text
+        options:
+            text:
+                - Maaf slurr tidak mengerti

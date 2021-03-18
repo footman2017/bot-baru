@@ -1,0 +1,102 @@
+intents:
+  intent_pagi:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_greeting
+      match: greeting_pagi
+
+  intent_siang:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_greeting
+      match: greeting_siang
+
+  intent_sore:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_greeting
+      match: greeting_sore
+
+  intent_malam:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_greeting
+      match: greeting_malam
+
+states:
+  state_initial:
+    initial: true
+    transitions:
+      state_pagi:
+        condition: intent == 'intent_pagi'
+      state_siang:
+        condition: intent == 'intent_siang'
+      state_sore:
+        condition: intent == 'intent_sore'
+      state_malam:
+        condition: intent == 'intent_malam'
+
+  state_pagi:
+    action:
+      - name: act_pagi
+      - name: action_first
+        condition: metadata.channelType == 'telegram'
+      - name: action_second
+        condition: metadata.channelType == 'line'
+    end: true
+
+  state_siang:
+    action:
+      - name: act_siang
+    end: true
+
+  state_sore:
+    action:
+      - name: act_sore
+    end: true
+
+  state_malam:
+    action:
+      - name: act_malam
+    end: true
+
+actions:
+  act_pagi:
+    type: text
+    options:
+      text:
+        - pagi
+
+  act_siang:
+    type: text
+    options:
+        text:
+          - siang
+
+  act_sore:
+    type: text
+    options:
+        text:
+          - sore
+          
+  act_malam:
+    type: text
+    options:
+        text:
+          - malam
+  
+  action_first:
+    type: text
+    options:
+      text:
+        - aksi pertama
+
+  action_second:
+    type: text
+    options:
+      text:
+        - aksi kedua

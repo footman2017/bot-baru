@@ -3,6 +3,6 @@ name: bot-baru
 desc: My First Bot
 flows:
     greeting: $include(flows/greeting.yml)
-    default: $include(flows/default.yml)
+    fallback: $include(flows/default.yml)
 nlus: $include(nlus.yml)
 tag: null

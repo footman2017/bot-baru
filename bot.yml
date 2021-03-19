@@ -2,7 +2,8 @@ schema: kata.ai/schema/kata-ml/1.0
 name: bot-baru
 desc: My First Bot
 flows:
+    traning: $include(flows/traning.yml)
     greeting: $include(flows/greeting.yml)
-    fallback: $include(flows/default.yml)
+    fallback: $include(flows/fallback.yml)
 nlus: $include(nlus.yml)
 tag: null

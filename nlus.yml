@@ -29,3 +29,28 @@ nlu_regex_nik:
   type: regex
   options:
     regex: '((^[0-9]{12,13})$)'
+
+nlu_trait_sapa:
+  type: nl
+  options:
+    nluId: 'raey3221:bot-baru'
+    threshold: 0.5
+    output: value
+    flatten: true
+
+nlu_dict_sapa:
+  type: nl
+  options:
+    nluId: 'raey3221:bot-baru'
+    threshold: 0.5
+    output: raw
+    flatten: false
+
+nlu_phrase:
+  type: nl
+  options:
+    nluId: 'raey3221:bot-baru'
+    threshold: 0.5
+    output: phrase
+    entity: smalltalk_phrase
+    labels: true

@@ -27,21 +27,6 @@ intents:
       nlu: nlu_greeting
       match: greeting_malam
 
-  intent_sapa:
-    type: text
-    initial: true
-    classifier:
-      nlu: nlu_greeting
-      match: hi
-
-  intent_input_nik:
-    type: text
-    initial: false
-    classifier:
-      nlu: nlu_regex_nik
-    attributes:
-      nik:
-        nlu: nlu_regex_nik
 states:
   state_initial:
     initial: true
@@ -54,8 +39,6 @@ states:
         condition: intent == 'intent_sore'
       state_malam:
         condition: intent == 'intent_malam'
-      state_sapa:
-        condition: intent == "intent_sapa"
 
   state_pagi:
     action:
@@ -79,23 +62,6 @@ states:
   state_malam:
     action:
       - name: act_malam
-    end: true
-
-  state_sapa:
-    transitions:
-      state_get_nik:
-        condition: intent=="intent_input_nik"
-        mapping:
-          data.nik: attributes.nik
-      state_sapa:
-        fallback: true
-    action:
-      - name: act_sapa
-      - name: act_tanya_nik
-
-  state_get_nik:
-    action:
-      - name: act_done_nik
     end: true
 
 actions:
@@ -134,22 +100,3 @@ actions:
     options:
       text:
         - aksi kedua
-  
-  act_sapa:
-    type: text
-    options: 
-      text:
-        - hi juga
-        - hallo juga
-  
-  act_tanya_nik:
-    type: text
-    options:
-      text:
-        - Silahkan masukan nik anda 12-13 karakter !
-
-  act_done_nik:
-    type: text
-    options:
-      text:
-        - NIK $(data.nik) terdaftar, terima kasih

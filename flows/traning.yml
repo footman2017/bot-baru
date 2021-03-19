@@ -1,0 +1,132 @@
+intents:
+  intent_sapa:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_greeting
+      match: hi
+
+  intent_input_nik:
+    type: text
+    initial: false
+    classifier:
+      nlu: nlu_regex_nik
+    attributes:
+      nik:
+        nlu: nlu_regex_nik
+
+  # intent_trait_greeting:
+  #   type: text
+  #   initial: false
+  #   fallback: false
+  #   classifier:
+  #     nlu: nlu_trait_sapa
+  #     expression: smalltalk_trait=="sapa"
+  
+  # intent_dict_sapa:
+  #   type: text
+  #   initial: false
+  #   fallback: false
+  #   classifier:
+  #     nlu: nlu_dict_sapa
+  #     expression: smalltalk_dictionary[0].resolved.dictKey=="sapa"
+  
+  # intent_phrase_sapa:
+  #   type: text
+  #   initial: true
+  #   fallback: false
+  #   classifier:
+  #     nlu: nlu_phrase
+  #     match: sapa
+  
+  intent_phrase_kabar:
+    type: text
+    initial: true
+    fallback: false
+    classifier:
+      nlu: nlu_phrase
+      match: kabar
+
+  intent_phrase_pujian:
+    type: text
+    initial: true
+    fallback: false
+    classifier:
+      nlu: nlu_phrase
+      match: pujian
+
+  fallback_intent:
+    type: text
+    initial: false
+    fallback: true
+    priority: -1
+
+states:
+  state_initial:
+    initial: true
+    transitions:
+      state_sapa:
+        condition: intent == "intent_sapa"
+      state_kabar:
+        condition: intent == "intent_phrase_kabar"
+      state_pujian:
+        condition: intent == "intent_phrase_pujian"
+
+  state_sapa:
+    transitions:
+      state_get_nik:
+        condition: intent=="intent_input_nik"
+        mapping:
+          data.nik: attributes.nik
+      state_sapa:
+        fallback: true
+    action:
+      - name: act_sapa
+      - name: act_tanya_nik
+
+  state_get_nik:
+    action:
+      - name: act_done_nik
+    end: true
+
+  state_kabar:
+    action:
+      - name: act_kabar
+    end : true
+
+  state_pujian:
+    action:
+      - name: act_pujian
+    end : true
+
+actions:
+  act_sapa:
+    type: text
+    options: 
+      text:
+        - hi juga
+        - hallo juga
+  
+  act_tanya_nik:
+    type: text
+    options:
+      text:
+        - Silahkan masukan nik anda 12-13 karakter !
+
+  act_done_nik:
+    type: text
+    options:
+      text:
+        - NIK $(data.nik) terdaftar, terima kasih
+  
+  act_kabar:
+    type: text
+    options: 
+      text:
+        - Kabarku baik
+  
+  act_pujian:
+    type: text
+    options: 
+      text:
+        - Ga tau malu emang

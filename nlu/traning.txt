@@ -1,0 +1,11 @@
+(@dict_menu menu)
+(@dict_menu mnu)
+(@dict_menu m)
+
+(@dict_reservasi reservasi)
+(@dict_reservasi reser)
+
+(@dict_makan makan)
+(@dict_baso baso)
+
+makan baso #topik:makan_baso

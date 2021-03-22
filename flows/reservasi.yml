@@ -1,0 +1,208 @@
+intents:
+  menuIntent:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_dict
+      expression: dict_menu[0].resolved.dictKey=="menu"
+
+  reservasiIntent:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_dict
+      expression: dict_reservasi[0].resolved.dictKey=="reservasi"
+
+  aboutIntent:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_dict
+      expression: dict_about[0].resolved.dictKey=="about"
+
+  diskonIntent:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_dict
+      expression: dict_diskon[0].resolved.dictKey=="diskon"
+
+  alamatIntent:
+    type: text
+    initial: true
+    classifier:
+      nlu: nlu_dict
+      expression: dict_alamat[0].resolved.dictKey=="alamat"
+
+states:
+  state_initial:
+    initial: true
+    transitions:
+      menuState:
+        condition: intent=="menuIntent"
+      reservasiState:
+        condition: intent=="reservasiIntent"
+      aboutState:
+        condition: intent=="aboutIntent"
+      diskonState:
+        condition: intent=="diskonIntent"
+      alamatState:
+        condition: intent=="alamatIntent"
+      
+  menuState:
+    action:
+      - name: showMenuforLine
+        # condition: metadata.channelType=="line"
+      # - name: showMenuforTele
+      #   condition: metadata.channelType=="telegram"
+    end: true
+
+  reservasiState:
+    action: 
+      - name: showReservasiText
+      - name: showReservasiButton
+    end: true
+
+  aboutState:
+    action: 
+      - name: showAboutText1
+      - name: showAboutText2
+      - name: showAboutImg
+    end: true
+
+  diskonState:
+    action: 
+      - name: showDiskonImg
+      - name: showDiskonButton
+    end: true
+
+  alamatState:
+    action: 
+      - name: showAlamat1
+      - name: showAlamat2
+      - name: showAlamat3
+      - name: showAlamat4
+      - name: showAlamat5
+    end: true
+
+actions:
+  showMenuforLine:
+    type: 'template'
+    options:
+      type: 'carousel'
+      items:
+        - text: menu paling pertama
+          title: menu satu
+          thumbnailImageUrl: "https://www.ranggaku.com/wp-content/uploads/2019/06/Gambar-Thumbnail-Manfaat-Brokolii-compressed.jpg"
+          actions:
+            - type: 'url'
+              url: https://www.ranggaku.com/manfaat-brokoli/
+              label: Brokoli
+        - text: menu selanjutnya
+          title: menu dua
+          thumbnailImageUrl: "https://www.ranggaku.com/wp-content/uploads/2019/06/Gambar-Thumbnail-Manfaat-Brokolii-compressed.jpg"
+          actions:
+            - type: 'url'
+              url: https://www.ranggaku.com/manfaat-brokoli/
+              label: Brokoli
+        - text: menu terakhir
+          title: menu tiga
+          thumbnailImageUrl: "https://www.ranggaku.com/wp-content/uploads/2019/06/Gambar-Thumbnail-Manfaat-Brokolii-compressed.jpg"
+          actions:
+            - type: 'url'
+              url: https://www.ranggaku.com/manfaat-brokoli/
+              label: Brokoli
+
+  showMenuforTele:
+    type: text
+    options:
+      text:
+        - "Menu 1 \n menu 2 \n menu 3"
+        
+  showReservasiText:
+    type: text
+    options:
+      text:
+        - this is reservation !!!
+
+  showReservasiButton:
+    type: 'template'
+    options:
+      type: 'button'
+      items:
+        text: This in button
+        title: Button
+        actions:
+          - type: 'url'
+            url: https://www.google.ca/
+            label: Google.com
+
+  showAboutText1:
+    type: text
+    options:
+      text:
+        - About us part 1
+
+  showAboutText2:
+    type: text
+    options:
+      text:
+        - About us part 2
+
+  showAboutImg:
+    type: 'template'
+    options:
+      type: 'image'
+      items:
+        originalContentUrl: https://www.itl.cat/pngfile/big/15-150142_unique-wallpaper-hd-crystal.jpg
+        previewImageUrl: https://www.itl.cat/pngfile/big/15-150142_unique-wallpaper-hd-crystal.jpg
+
+  showDiskonImg:
+    type: 'template'
+    options:
+      type: 'image'
+      items:
+        originalContentUrl: https://www.onlygfx.com/wp-content/uploads/2018/04/discount-stamp-1-1024x707.png
+        previewImageUrl: https://www.onlygfx.com/wp-content/uploads/2018/04/discount-stamp-1-1024x707.png
+
+  showDiskonButton:
+    type: 'template'
+    options:
+      type: 'button'
+      items:
+        text: Click here for Discount
+        title: DISKON
+        actions:
+          - type: 'url'
+            url: https://dictionary.cambridge.org/dictionary/english/discount
+            label: Get Discount
+  
+  showAlamat1:
+    type: text
+    options:
+      text:
+        - Jl. Kopo no.2
+
+  showAlamat2:
+    type: text
+    options:
+      text:
+        - Jl. Nyengseret no.31
+
+  showAlamat3:
+    type: text
+    options:
+      text:
+        - Jl. Peta no.44
+
+  showAlamat4:
+    type: text
+    options:
+      text:
+        - Jl. Astana Anyar no.3
+
+  showAlamat5:
+    type: text
+    options:
+      text:
+        - Jl. Otista no.6

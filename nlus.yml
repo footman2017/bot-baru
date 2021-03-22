@@ -24,6 +24,14 @@ reservasiNLU:
     keywords :
       menu:
         - menu
+      reservasi:
+        - reservasi
+      about:
+        - about
+      diskon:
+        - diskon
+      alamat:
+        - alamat
 
 nlu_regex_nik:
   type: regex
@@ -54,3 +62,12 @@ nlu_phrase:
     output: phrase
     entity: smalltalk_phrase
     labels: true
+
+nlu_dict:
+  type: nl
+  options:
+    nluId: 'raey3221:bot-baru'
+    threshold: 0.5
+    output: raw
+    flatten: false
+    

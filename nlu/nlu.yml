@@ -1,0 +1,106 @@
+name: bot-baru
+lang: id
+visibility: private
+entities:
+  kata:
+    type: phrase
+    profile: super
+    labels:
+      - area
+      - currency
+      - datetime
+      - duration
+      - email
+      - length
+      - location
+      - number
+      - person
+      - phone
+      - temperature
+      - volume
+      - weight
+    inherit: 'kata:nl/kata'
+  smalltalk_trait:
+    type: trait
+    profile: default
+    labels:
+      - sapa
+  smalltalk_dictionary:
+    type: dict
+    profile: default
+    dictionary:
+      sapa:
+        - hi
+        - halo
+        - hallo
+        - hello
+        - hei
+        - hey
+        - hai
+  smalltalk_phrase:
+    type: phrase
+    profile: default
+    labels:
+      - sapa
+      - kabar
+      - pujian
+  # ------------
+  # menu
+  # ------------
+  dict_menu:
+    type: dict
+    profile: default
+    dictionary:
+      menu:
+        - menu
+        - m
+        - mnu
+        - menunya
+
+  
+  # ------------
+  # menu
+  # ------------
+  dict_reservasi:
+    type: dict
+    profile: default
+    dictionary:
+      reservasi:
+        - reservasi
+        - reser
+        - liat reservasi
+    
+  # ------------
+  # menu
+  # ------------
+  dict_about:
+    type: dict
+    profile: default
+    dictionary:
+      about:
+        - about
+        - about us
+        - lihat about
+        - liat about
+        - abut
+
+  # ------------
+  # menu
+  # ------------
+  dict_diskon:
+    type: dict
+    profile: default
+    dictionary:
+      diskon:
+        - diskon
+        - discount
+        - lihat discount
+
+  dict_alamat:
+    type: dict
+    profile: default
+    dictionary:
+      alamat:
+        - alamat
+        - addres
+        - address

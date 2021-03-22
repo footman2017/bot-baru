@@ -1,10 +1,10 @@
 intents:
-  intent_sapa:
-    type: text
-    initial: true
-    classifier:
-      nlu: nlu_greeting
-      match: hi
+  # intent_sapa:
+  #   type: text
+  #   initial: true
+  #   classifier:
+  #     nlu: nlu_greeting
+  #     match: hi
 
   intent_input_nik:
     type: text
@@ -15,13 +15,13 @@ intents:
       nik:
         nlu: nlu_regex_nik
 
-  # intent_trait_greeting:
-  #   type: text
-  #   initial: false
-  #   fallback: false
-  #   classifier:
-  #     nlu: nlu_trait_sapa
-  #     expression: smalltalk_trait=="sapa"
+  intent_trait_sapa:
+    type: text
+    initial: true
+    fallback: false
+    classifier:
+      nlu: nlu_trait_sapa
+      expression: smalltalk_trait=="sapa"
   
   # intent_dict_sapa:
   #   type: text
@@ -66,7 +66,7 @@ states:
     initial: true
     transitions:
       state_sapa:
-        condition: intent == "intent_sapa"
+        condition: intent == "intent_trait_sapa"
       state_kabar:
         condition: intent == "intent_phrase_kabar"
       state_pujian:

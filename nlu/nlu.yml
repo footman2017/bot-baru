@@ -45,7 +45,7 @@ entities:
       - kabar
       - pujian
   # ------------
-  # menu
+  # MENU
   # ------------
   dict_menu:
     type: dict
@@ -56,10 +56,15 @@ entities:
         - m
         - mnu
         - menunya
-
   
+  trait_menu:
+    type: trait
+    profile: default
+    labels:
+      - menu
+
   # ------------
-  # menu
+  # reservasi
   # ------------
   dict_reservasi:
     type: dict
@@ -69,9 +74,15 @@ entities:
         - reservasi
         - reser
         - liat reservasi
-    
+  
+  trait_reservasi:
+    type: trait
+    profile: default
+    labels:
+      - reservasi
+  
   # ------------
-  # menu
+  # about
   # ------------
   dict_about:
     type: dict
@@ -85,7 +96,7 @@ entities:
         - abut
 
   # ------------
-  # menu
+  # diskon
   # ------------
   dict_diskon:
     type: dict
@@ -95,6 +106,10 @@ entities:
         - diskon
         - discount
         - lihat discount
+
+  # ------------
+  # diskon
+  # ------------
 
   dict_alamat:
     type: dict

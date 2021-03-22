@@ -95,6 +95,12 @@ entities:
         - liat about
         - abut
 
+  trait_about:
+    type: trait
+    profile: default
+    labels:
+      - about
+
   # ------------
   # diskon
   # ------------
@@ -106,6 +112,12 @@ entities:
         - diskon
         - discount
         - lihat discount
+
+  trait_diskon:
+    type: trait
+    profile: default
+    labels:
+      - diskon
 
   # ------------
   # diskon
@@ -119,3 +131,9 @@ entities:
         - alamat
         - addres
         - address
+
+  trait_alamat:
+    type: trait
+    profile: default
+    labels:
+      - alamat

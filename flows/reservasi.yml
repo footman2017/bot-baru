@@ -3,38 +3,38 @@ intents:
     type: text
     initial: true
     classifier:
-      nlu: nlu_trait_sapa
-      expression: trait_menu=="menu"
-      # expression: dict_menu[0].resolved.dictKey=="menu"
+      nlu: nlu_trait_sapa                       
+      # expression: trait_menu=="menu"
+      expression: dict_menu[0].resolved.dictKey=="menu"
 
   reservasiIntent:
     type: text
     initial: true
     classifier:
       nlu: nlu_trait_sapa
-      expression: trait_reservasi=="reservasi"
-      # expression: dict_reservasi[0].resolved.dictKey=="reservasi"
+      # expression: trait_reservasi=="reservasi"
+      expression: dict_reservasi[0].resolved.dictKey=="reservasi"
 
   aboutIntent:
     type: text
     initial: true
     classifier:
-      nlu: nlu_dict
-      expression: dict_about[0].resolved.dictKey=="about"
+      nlu: nlu_trait_sapa
+      expression: trait_about=="about"
 
   diskonIntent:
     type: text
     initial: true
     classifier:
-      nlu: nlu_dict
-      expression: dict_diskon[0].resolved.dictKey=="diskon"
+      nlu: nlu_trait_sapa
+      expression: trait_diskon=="diskon"
 
   alamatIntent:
     type: text
     initial: true
     classifier:
-      nlu: nlu_dict
-      expression: dict_alamat[0].resolved.dictKey=="alamat"
+      nlu: nlu_trait_sapa
+      expression: trait_alamat=="alamat"
 
 states:
   state_initial:

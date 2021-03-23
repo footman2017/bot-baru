@@ -27,6 +27,12 @@ intents:
       nlu: nlu_greeting
       match: greeting_malam
 
+  intent_command_terimakasih:
+    type: command
+    initial: true
+    condition: content=="call_terimakasih"
+
+
 states:
   state_initial:
     initial: true
@@ -39,6 +45,10 @@ states:
         condition: intent == 'intent_sore'
       state_malam:
         condition: intent == 'intent_malam'
+      state_terimakasih:
+        condition: intent == 'intent_command_terimakasih'
+        mapping:
+          data.userName: payload.userName
 
   state_pagi:
     action:
@@ -52,6 +62,7 @@ states:
   state_siang:
     action:
       - name: act_siang
+      - name: act_cmd_terimakasih
     end: true
 
   state_sore:
@@ -62,6 +73,12 @@ states:
   state_malam:
     action:
       - name: act_malam
+      - name: act_cmd_terimakasih
+    end: true
+
+  state_terimakasih:
+    action:
+      - name: act_terimakasih
     end: true
 
 actions:
@@ -100,3 +117,16 @@ actions:
     options:
       text:
         - aksi kedua
+  
+  act_cmd_terimakasih:
+    type: command
+    options: 
+      command: call_terimakasih
+      payload:
+        userName: Raey Faldo
+
+  act_terimakasih:
+    type: text
+    options:
+      text:
+        - Terima kasih $(data.userName)

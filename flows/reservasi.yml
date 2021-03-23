@@ -35,6 +35,12 @@ intents:
     classifier:
       nlu: nlu_trait_sapa
       expression: trait_alamat=="alamat"
+  
+  menuChosenIntent:
+    type: data
+    initial: false
+    fallback: false
+    condition: payload.produk=="brokoli"
 
 states:
   state_initial:
@@ -52,12 +58,17 @@ states:
         condition: intent=="alamatIntent"
       
   menuState:
+    transitions:
+      showChosenMenuState:
+        condition: intent=="menuChosenIntent"
+        mapping:
+          context.produk: payload.produk
     action:
       - name: showMenuforLine
         condition: metadata.channelType == 'line'
       - name: showMenuforTele
         condition: metadata.channelType == 'telegram'
-    end: true
+    end: false
 
   reservasiState:
     action: 
@@ -87,6 +98,11 @@ states:
       - name: showAlamat5
     end: true
 
+  showChosenMenuState:
+    action:
+      - name: showChosenMenuAct
+    end: true
+
 actions:
   showMenuforLine:
     type: 'template'
@@ -97,9 +113,14 @@ actions:
           title: menu satu
           thumbnailImageUrl: "https://www.ranggaku.com/wp-content/uploads/2019/06/Gambar-Thumbnail-Manfaat-Brokolii-compressed.jpg"
           actions:
-            - type: 'url'
-              url: https://www.ranggaku.com/manfaat-brokoli/
-              label: Brokoli
+            - type: postback
+              label: Brokoli lurr
+              payload:
+                produk: brokoli
+            # - type: 'url'
+            #   url: https://www.ranggaku.com/manfaat-brokoli/
+            #   label: Brokoli
+
         - text: menu selanjutnya
           title: menu dua
           thumbnailImageUrl: "https://www.ranggaku.com/wp-content/uploads/2019/06/Gambar-Thumbnail-Manfaat-Brokolii-compressed.jpg"
@@ -107,6 +128,7 @@ actions:
             - type: 'url'
               url: https://www.ranggaku.com/manfaat-brokoli/
               label: Brokoli
+
         - text: menu terakhir
           title: menu tiga
           thumbnailImageUrl: "https://www.ranggaku.com/wp-content/uploads/2019/06/Gambar-Thumbnail-Manfaat-Brokolii-compressed.jpg"
@@ -208,3 +230,9 @@ actions:
     options:
       text:
         - Jl. Otista no.6
+
+  showChosenMenuAct:
+    type: text
+    options:
+      text:
+        - anda memesan $(context.produk)

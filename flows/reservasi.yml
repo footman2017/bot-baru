@@ -3,7 +3,7 @@ intents:
     type: text
     initial: true
     classifier:
-      nlu: nlu_trait_sapa                       
+      nlu: nlu_dict                       
       # expression: trait_menu=="menu"
       expression: dict_menu[0].resolved.dictKey=="menu"
 
@@ -11,7 +11,7 @@ intents:
     type: text
     initial: true
     classifier:
-      nlu: nlu_trait_sapa
+      nlu: nlu_dict
       # expression: trait_reservasi=="reservasi"
       expression: dict_reservasi[0].resolved.dictKey=="reservasi"
 

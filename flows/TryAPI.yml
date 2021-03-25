@@ -3,13 +3,6 @@ intents:
         type: command
         condition: content == "reenter"
     
-    intent_lihat_user:
-        type: text
-        initial: true
-        classifier:
-            nlu: nlu_dict
-            expression: user_dict[0].resolved.dictKey=="user"
-
     intent_detail:
         type: text
         initial: true
@@ -34,40 +27,20 @@ intents:
     intent_cmd_get_user_byid:
         type: command
         condition: content=="call_api_get_user_by_id"
+    
+    intent_command_terimakasih:
+        type: command
+        initial: true
+        condition: content=="call_terimakasih"
 
 states:
     initial_state:
         initial: true
         transitions:
-            state_get_email_user:
-                condition: intent == 'intent_lihat_user'
             state_get_detail:
                 condition: intent == 'intent_detail'
-
-    state_get_email_user:
-        action:
-            - name: act_hit_api_get_users
-            - name: command
-              options:
-                command: call_api_get_user
-                payload:
-                    res_api_get_user: $(result)
-        transitions:
-            state_show_users:
-                mapping:
-                    data.email: payload.res_api_get_user.email
-            state_not_found:
-                fallback: true
-
-    state_show_users:
-        action:
-            - name: act_show_users
-        end: true
-
-    state_not_found:
-        action:
-            - name: act_not_found
-        end: true
+            state_terimakasih:
+                condition: intent == 'intent_command_terimakasih'
 
     state_get_detail:
         action:
@@ -91,32 +64,34 @@ states:
                 command: call_api_get_user_by_id
                 payload:
                     res_api_get_user_byid: $(result)
+        end: false
         
         transitions:
             state_show_users_byid:
+                condition: "payload.res_api_get_user_byid"
                 mapping:
                     data.name: payload.res_api_get_user_byid.name
                     data.email: payload.res_api_get_user_byid.email
-        end: false
+            state_not_found:
+                condition: "!payload.res_api_get_user_byid"
 
     state_show_users_byid:
         action:
             - name: act_show_users_byid
+            - name: act_terima_kasih
+        end: true
+    
+    state_not_found:
+        action:
+            - name: act_not_found
+        end: true
+    
+    state_terimakasih:
+        action:
+            - name: act_terimakasih
         end: true
 
 actions:
-    act_hit_api_get_users:
-        type: api
-        options:
-            method: GET
-            uri: "$(config.urlApi)/users/1"
-
-    act_show_users:
-        type: text
-        options:
-            text:
-                - Email user adalah $(data.email)
-
     act_not_found:
         type: text
         options:
@@ -140,3 +115,16 @@ actions:
         options:
             text:
                 - "Nama: $(data.name)\nEmail: $(data.email)"
+
+    act_terima_kasih:
+        type: command
+        options: 
+            command: call_terimakasih
+            payload:
+                userName: Raey Faldo
+
+    act_terimakasih:
+        type: text
+        options:
+            text:
+                - Terima kasih $(data.userName)

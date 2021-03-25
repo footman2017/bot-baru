@@ -11,3 +11,4 @@ nlus: $include(nlus.yml)
 tag: null
 config:
     urlApi: 'https://jsonplaceholder.typicode.com'
+    maxRecursion: 10

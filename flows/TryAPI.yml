@@ -5,19 +5,30 @@ intents:
         classifier:
             nlu: nlu_dict
             expression: user_dict[0].resolved.dictKey=="user"
-    
-    # intent_ask_id_user:
-    #     type: text
-    #     initial: false
-    #     classifier:
-    #         nlu: nlu_regex_id
-    #     attributes:
-    #         user_id:
-    #             nlu: nlu_regex_id
+
+    intent_detail:
+        type: text
+        initial: true
+        classifier:
+            nlu: detailNLU
+            match: detail
+
+    intent_input_id_user:
+        type: text
+        initial: false
+        classifier:
+            nlu: nlu_regex_id
+        attributes:
+            user_id:
+                nlu: nlu_regex_id
 
     intent_cmd_get_user:
         type: command
         condition: content=="call_api_get_user"
+    
+    intent_cmd_get_user_byid:
+        type: command
+        condition: content=="call_api_get_user_by_id"
 
 states:
     initial_state:
@@ -25,6 +36,8 @@ states:
         transitions:
             state_get_email_user:
                 condition: intent == 'intent_lihat_user'
+            state_get_detail:
+                condition: intent == 'intent_detail'
 
     state_get_email_user:
         action:
@@ -36,8 +49,6 @@ states:
                     res_api_get_user: $(result)
         transitions:
             state_show_users:
-            # condition: "payload.res_api_get_user.name"
-                # condition: payload.res_api_get_user!="null"
                 mapping:
                     data.email: payload.res_api_get_user.email
             state_not_found:
@@ -51,6 +62,40 @@ states:
     state_not_found:
         action:
             - name: act_not_found
+        end: true
+
+    state_get_detail:
+        transitions:
+            state_get_id:
+                condition: intent=="intent_input_id_user"
+                mapping:
+                    data.user_id: attributes.user_id
+            state_get_detail:
+                fallback: true
+        action:
+            - name: act_ask_id
+        end: false
+
+    state_get_id:
+        action:
+            - name: act_hit_api_get_users_byid
+            - name: command
+              options:
+                command: call_api_get_user_by_id
+                payload:
+                    res_api_get_user_byid: $(result)
+        transitions:
+            state_show_users_byid:
+                mapping:
+                    data.name: payload.res_api_get_user_byid.name
+                    data.email: payload.res_api_get_user_byid.email
+            # state_not_found:
+            #     fallback: true
+        end: false
+
+    state_show_users_byid:
+        action:
+            - name: act_show_users_byid
         end: true
 
 actions:
@@ -71,3 +116,21 @@ actions:
         options:
             text:
                 - Data Tidak ditemukan
+    
+    act_ask_id:
+        type: text
+        options:
+            text:
+                - Silahkan masukkan id user yang ingin dilihat (1-99)
+
+    act_hit_api_get_users_byid:
+        type: api
+        options:
+            method: GET
+            uri: "$(config.urlApi)/users/$(data.user_id)"
+
+    act_show_users_byid:
+        type: text
+        options:
+            text:
+                - "Nama: $(data.name)\nEmail: $(data.email)"

@@ -33,15 +33,22 @@ reservasiNLU:
       alamat:
         - alamat
 
+detailNLU:
+  type: keyword
+  options:
+    keywords :
+      detail:
+        - detail
+
 nlu_regex_nik:
   type: regex
   options:
     regex: '((^[0-9]{12,13})$)'
 
-# nlu_regex_id:
-#   type: regex
-#   options:
-#     regex: '((^[0-99])$)'
+nlu_regex_id:
+  type: regex
+  options:
+    regex: '((^[0-99])$)'
 
 nlu_trait_sapa:
   type: nl

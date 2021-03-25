@@ -1,4 +1,8 @@
 intents:
+    reenter:
+        type: command
+        condition: content == "reenter"
+    
     intent_lihat_user:
         type: text
         initial: true
@@ -16,6 +20,7 @@ intents:
     intent_input_id_user:
         type: text
         initial: false
+        fallback: false
         classifier:
             nlu: nlu_regex_id
         attributes:
@@ -65,16 +70,18 @@ states:
         end: true
 
     state_get_detail:
+        action:
+            - name: act_ask_id
+        end: false
+        
         transitions:
             state_get_id:
                 condition: intent=="intent_input_id_user"
                 mapping:
                     data.user_id: attributes.user_id
+
             state_get_detail:
                 fallback: true
-        action:
-            - name: act_ask_id
-        end: false
 
     state_get_id:
         action:
@@ -84,13 +91,12 @@ states:
                 command: call_api_get_user_by_id
                 payload:
                     res_api_get_user_byid: $(result)
+        
         transitions:
             state_show_users_byid:
                 mapping:
                     data.name: payload.res_api_get_user_byid.name
                     data.email: payload.res_api_get_user_byid.email
-            # state_not_found:
-            #     fallback: true
         end: false
 
     state_show_users_byid:

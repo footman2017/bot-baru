@@ -44,6 +44,15 @@ entities:
       - sapa
       - kabar
       - pujian
+  
+  user_dict:
+    type: dict
+    profile: default
+    dictionary:
+      user:
+        - user
+        - pengguna
+
   # ------------
   # MENU
   # ------------

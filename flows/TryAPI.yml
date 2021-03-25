@@ -1,0 +1,73 @@
+intents:
+    intent_lihat_user:
+        type: text
+        initial: true
+        classifier:
+            nlu: nlu_dict
+            expression: user_dict[0].resolved.dictKey=="user"
+    
+    # intent_ask_id_user:
+    #     type: text
+    #     initial: false
+    #     classifier:
+    #         nlu: nlu_regex_id
+    #     attributes:
+    #         user_id:
+    #             nlu: nlu_regex_id
+
+    intent_cmd_get_user:
+        type: command
+        condition: content=="call_api_get_user"
+
+states:
+    initial_state:
+        initial: true
+        transitions:
+            state_get_email_user:
+                condition: intent == 'intent_lihat_user'
+
+    state_get_email_user:
+        action:
+            - name: act_hit_api_get_users
+            - name: command
+              options:
+                command: call_api_get_user
+                payload:
+                    res_api_get_user: $(result)
+        transitions:
+            state_show_users:
+            # condition: "payload.res_api_get_user.name"
+                # condition: payload.res_api_get_user!="null"
+                mapping:
+                    data.email: payload.res_api_get_user.email
+            state_not_found:
+                fallback: true
+
+    state_show_users:
+        action:
+            - name: act_show_users
+        end: true
+
+    state_not_found:
+        action:
+            - name: act_not_found
+        end: true
+
+actions:
+    act_hit_api_get_users:
+        type: api
+        options:
+            method: GET
+            uri: "$(config.urlApi)/users/1"
+
+    act_show_users:
+        type: text
+        options:
+            text:
+                - Email user adalah $(data.email)
+
+    act_not_found:
+        type: text
+        options:
+            text:
+                - Data Tidak ditemukan

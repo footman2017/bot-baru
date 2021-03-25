@@ -38,6 +38,11 @@ nlu_regex_nik:
   options:
     regex: '((^[0-9]{12,13})$)'
 
+# nlu_regex_id:
+#   type: regex
+#   options:
+#     regex: '((^[0-99])$)'
+
 nlu_trait_sapa:
   type: nl
   options:

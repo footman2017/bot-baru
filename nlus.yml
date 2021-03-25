@@ -48,7 +48,7 @@ nlu_regex_nik:
 nlu_regex_id:
   type: regex
   options:
-    regex: '((^[0-99])$)'
+    regex: '(^[1-9][0-9]?$)'
 
 nlu_trait_sapa:
   type: nl

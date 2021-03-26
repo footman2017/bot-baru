@@ -1,7 +1,7 @@
 intents:
-    reenter:
-        type: command
-        condition: content == "reenter"
+    # reenter:
+    #     type: command
+    #     condition: content == "reenter"
     
     intent_detail:
         type: text
@@ -19,10 +19,6 @@ intents:
         attributes:
             user_id:
                 nlu: nlu_regex_id
-
-    intent_cmd_get_user:
-        type: command
-        condition: content=="call_api_get_user"
     
     intent_cmd_get_user_byid:
         type: command
@@ -32,6 +28,12 @@ intents:
         type: command
         initial: true
         condition: content=="call_terimakasih"
+
+    fallback_intent:
+        type: text
+        initial: false
+        fallback: true
+        priority: -1
 
 states:
     initial_state:
@@ -45,7 +47,6 @@ states:
     state_get_detail:
         action:
             - name: act_ask_id
-        end: false
         
         transitions:
             state_get_id:

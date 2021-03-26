@@ -5,9 +5,6 @@ intents:
   #   classifier:
   #     nlu: nlu_greeting
   #     match: hi
-  reenter:
-    type: command
-    condition: content == "reenter"
 
   intent_input_nik:
     type: text

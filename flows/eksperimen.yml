@@ -1,0 +1,41 @@
+intents:
+    intent_eksperiment:
+        type: text
+        initial: true
+        condition: content == "eksperimen"
+
+    # fallback_intent:
+    #     type: text
+    #     initial: false
+    #     fallback: true
+    #     priority: -1
+
+states:
+    initial_state:
+        initial: true
+        transitions:
+            state_eksperimen:
+                condition: intent == 'intent_eksperiment'
+
+    state_eksperimen:
+        action:
+            - name: act_eksperiment_img
+            - name: act_eksperiment_text
+        end: true
+
+    
+
+actions:
+    act_eksperiment_img:
+        type: 'template'
+        options:
+            type: 'image'
+            items:
+                originalContentUrl: https://www.itl.cat/pngfile/big/15-150142_unique-wallpaper-hd-crystal.jpg
+                previewImageUrl: https://www.itl.cat/pngfile/big/15-150142_unique-wallpaper-hd-crystal.jpg
+
+    act_eksperiment_text:
+        type: text
+        options:
+            text:
+                - Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja.

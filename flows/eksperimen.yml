@@ -31,8 +31,8 @@ actions:
         options:
             type: 'image'
             items:
-                originalContentUrl: https://www.itl.cat/pngfile/big/15-150142_unique-wallpaper-hd-crystal.jpg
-                previewImageUrl: https://www.itl.cat/pngfile/big/15-150142_unique-wallpaper-hd-crystal.jpg
+                originalContentUrl: https://assets.merci.co.id/new-merci-hi.png
+                previewImageUrl: https://assets.merci.co.id/new-merci-hi.png
 
     act_eksperiment_text:
         type: text

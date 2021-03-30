@@ -4,6 +4,16 @@ intents:
         initial: true
         condition: content == "eksperimen"
 
+    # intent_eksperiment_next:
+    #     type: text
+    #     initial: false
+    #     condition: data.flag_eksperimen == "true"
+    
+    intent_command:
+        type: command
+        initial: true
+        condition: content=="call_act_eksperiment_text"
+
     intent_eksperiment2:
         type: text
         initial: true
@@ -24,29 +34,50 @@ states:
     initial_state:
         initial: true
         transitions:
-            state_eksperimen:
+            state_eksperimen_img:
                 condition: intent == 'intent_eksperiment'
-            state_eksperimen2:
+            state_eksperimen_img2:
                 condition: intent == 'intent_eksperiment2'
-            state_eksperimen3:
+            state_eksperimen_img3:
                 condition: intent == 'intent_eksperiment3'
 
-    state_eksperimen:
+    state_eksperimen_img:
         action:
             - name: act_eksperiment_img
+            - name: cmd_eksperimen_text
+        transitions: 
+            state_eksperimen_text:
+                condition: intent == 'intent_command'
+
+    state_eksperimen_img2:
+        action:
+            - name: act_eksperiment_img
+            - name: cmd_eksperimen_text
+        transitions: 
+            state_eksperimen_text2:
+                condition: intent == 'intent_command'
+
+    state_eksperimen_img3:
+        action:
+            - name: act_eksperiment_img
+            - name: cmd_eksperimen_text
+        transitions: 
+            state_eksperimen_text3:
+                condition: intent == 'intent_command'
+
+    state_eksperimen_text:
+        action:
             - name: act_eksperiment_text
         end: true
 
-    state_eksperimen2:
+    state_eksperimen_text2:
         action:
-            - name: act_eksperiment_img
             - name: act_eksperiment_text
             - name: act_eksperiment_text
         end: true
 
-    state_eksperimen3:
+    state_eksperimen_text3:
         action:
-            - name: act_eksperiment_img
             - name: act_eksperiment_text
             - name: act_eksperiment_text
             - name: act_eksperiment_text
@@ -66,3 +97,8 @@ actions:
         options:
             text:
                 - Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja. Ini adalah pesan testing saja.
+
+    cmd_eksperimen_text:
+        type: command
+        options: 
+            command: call_act_eksperiment_text

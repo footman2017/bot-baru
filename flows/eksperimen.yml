@@ -4,6 +4,16 @@ intents:
         initial: true
         condition: content == "eksperimen"
 
+    intent_eksperiment2:
+        type: text
+        initial: true
+        condition: content == "eksperimen2"
+
+    intent_eksperiment3:
+        type: text
+        initial: true
+        condition: content == "eksperimen3"
+
     # fallback_intent:
     #     type: text
     #     initial: false
@@ -16,6 +26,10 @@ states:
         transitions:
             state_eksperimen:
                 condition: intent == 'intent_eksperiment'
+            state_eksperimen2:
+                condition: intent == 'intent_eksperiment2'
+            state_eksperimen3:
+                condition: intent == 'intent_eksperiment3'
 
     state_eksperimen:
         action:
@@ -23,7 +37,20 @@ states:
             - name: act_eksperiment_text
         end: true
 
-    
+    state_eksperimen2:
+        action:
+            - name: act_eksperiment_img
+            - name: act_eksperiment_text
+            - name: act_eksperiment_text
+        end: true
+
+    state_eksperimen3:
+        action:
+            - name: act_eksperiment_img
+            - name: act_eksperiment_text
+            - name: act_eksperiment_text
+            - name: act_eksperiment_text
+        end: true
 
 actions:
     act_eksperiment_img:
